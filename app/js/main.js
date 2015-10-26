@@ -20,7 +20,7 @@ var _backbone = require('backbone');
 var _backbone2 = _interopRequireDefault(_backbone);
 
 _jquery2['default'].ajaxSetup({
-  header: {
+  headers: {
     'X-Parse-Application-Id': 'NKQ0EaAwxrKfDTv4oD41FK5qM4HuoF67E3ClO0Hg',
     'X-Parse-REST-API-KEY': 'sUMur3NnKVo2VyZaxBEY5EdFsu2lj2fNjESEm8fu'
   }
@@ -34,7 +34,7 @@ var Person = _backbone2['default'].Model.extend({
 
 });
 
-var Peeps = _backbone2['default'].Collection.Extend({
+var Peeps = _backbone2['default'].Collection.extend({
 
   url: 'https://api.parse.com/1/classes/people',
 
@@ -46,18 +46,21 @@ var Peeps = _backbone2['default'].Collection.Extend({
 });
 
 function PeepTemp(data) {
-  return '\n    <p> This is ' + data.first + ' ' + data.last + '. His favorite word is ' + data.phrase + '</p>\n    ';
+  return '\n    <div>\n      <img src="' + data.img + '">\n      <p> This is ' + data.first + ' ' + data.last + '. His favorite word is ' + data.phrase + '.</p>\n    </div>\n    ';
 };
 
 var people = new Peeps();
 
-function makePeople() {
-  var $d = (0, _jquery2['default'])('<div></div>');
+function makePeep() {
+  var $div = (0, _jquery2['default'])('<div class="wrapper"></div>');
   people.each(function (person) {
     var data = person.toJSON();
-    $d.append(PeepTemp(data));
+    $div.append(PeepTemp(data));
   });
+  (0, _jquery2['default'])('body').html($div);
 };
+
+people.fetch().then(makePeep);
 
 },{"backbone":2,"jquery":3,"moment":4,"underscore":5}],2:[function(require,module,exports){
 (function (global){

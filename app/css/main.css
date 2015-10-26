@@ -2019,6 +2019,19 @@
   content: ""; }
 
 body {
-  background: #e2ebf3; }
+  background: #ccc;
+  text-align: center; }
+
+img {
+  height: auto;
+  width: 200px; }
+
+div {
+  width: 400px;
+  margin: auto; }
+
+.wrapper {
+  width: 1200px;
+  margin: 100px auto; }
 
 /*# sourceMappingURL=main.css.map */
